@@ -1,105 +1,104 @@
-# If you find this plugin useful, please give my repository a star!
-Your support is my motivation to keep updating it.
-Contributions and improvements from everyone are also very welcome!
+# 中文 | [English](README_EN.md)
 
-# GitHub Repository: https://github.com/zhongjiahao-M/shortcut-color-plugin.git
-# Shortcut Color Plugin
+# ⭐如果觉得好用，请给本插件Git仓库点个赞！！
+# ⭐本插件GitHub地址：https://github.com/zhongjiahao-M/shortcut-color-plugin.git
+# 快捷键变色插件
 
-A powerful SiYuan plugin that allows you to quickly format text with custom colors and bold styles using keyboard shortcuts.
+一个强大的思源笔记插件，让您可以使用自定义键盘快捷键快速为文本添加颜色和加粗格式。
 
-## Features
+## 功能特色
 
-- **Custom Keyboard Shortcuts**: Create personalized shortcuts for text formatting
-- **Color Customization**: Choose any color for your text formatting
-- **Bold Toggle**: Option to apply bold formatting along with colors
-- **Smart Hotkey Capture**: Click input field and press key combinations to set shortcuts
-- **Responsive Design**: Works perfectly on desktop and mobile devices
-- **Undo Support**: All formatting can be undone with Cmd+Z (Ctrl+Z)
+- **自定义快捷键**: 创建个性化的文本格式化快捷键
+- **颜色自定义**: 为文本格式化选择任意颜色
+- **加粗切换**: 可选择是否在颜色格式化的同时添加加粗效果
+- **智能快捷键捕获**: 点击输入框并按下组合键即可设置快捷键
+- **响应式设计**: 在桌面端和移动端都能完美工作
+- **撤销支持**: 所有格式化操作都支持 Cmd+Z (Ctrl+Z) 撤销
 
-## Default Shortcuts
+## 默认快捷键
 
-The plugin comes with these pre-configured shortcuts:
+插件预配置了以下快捷键：
 
-- `⌃R` - Red bold text
-- `⌃B` - Blue bold text  
-- `⌃O` - Orange bold text
-- `⌃P` - Purple bold text
-- `⌃K` - Black text (no bold)
+- `⌃R` - 红色加粗文本
+- `⌃B` - 蓝色加粗文本  
+- `⌃O` - 橙色加粗文本
+- `⌃P` - 紫色加粗文本
+- `⌃K` - 黑色文本（不加粗）
 
-## How to Use
+## 使用方法
 
-### Basic Usage
+### 基本用法
 
-1. **Select text** in your SiYuan document
-2. **Press a shortcut key** (e.g., `⌃R` for red bold)
-3. Your text will be formatted instantly
-4. Use `Cmd+Z` (or `Ctrl+Z`) to undo if needed
+1. 在思源笔记文档中**选中文本**
+2. **按下快捷键**（例如 `⌃R` 设置红色加粗）
+3. 文本将立即被格式化
+4. 如需撤销，使用 `Cmd+Z`（或 `Ctrl+Z`）
 
-### Customizing Shortcuts
+### 自定义快捷键
 
-1. Open **Settings** → **Plugin Settings** → **Shortcut Color**
-2. Each shortcut item shows in a row with:
-   - **Name**: Description of the shortcut
-   - **Hotkey**: Click to set a new key combination
-   - **Color**: Click to choose a color
-   - **Bold**: Check/uncheck for bold formatting
-3. **Adding shortcuts**: Click "Add Shortcut" button
-4. **Removing shortcuts**: Click the "×" button on any item
-5. **Save settings**: Click "Save" to apply changes
+1. 打开**设置** → **插件设置** → **快捷键变色**
+2. 每个快捷键项目显示为一行，包含：
+   - **名称**: 快捷键的描述
+   - **快捷键**: 点击设置新的组合键
+   - **颜色**: 点击选择颜色
+   - **加粗**: 勾选/取消勾选是否加粗
+3. **添加快捷键**: 点击"添加快捷键"按钮
+4. **删除快捷键**: 点击任意项目的"×"按钮
+5. **保存设置**: 点击"保存"应用更改
 
-### Setting Hotkeys
+### 设置快捷键
 
-1. **Click the hotkey input field**
-2. **Press your desired key combination** (e.g., Cmd+R, Ctrl+Shift+A)
-3. The shortcut will be captured automatically
-4. **Requirements**: Must include at least one modifier key (Ctrl, Alt, Shift, Cmd)
+1. **点击快捷键输入框**
+2. **按下您想要的组合键**（例如 Cmd+R, Ctrl+Shift+A）
+3. 快捷键将被自动捕获
+4. **要求**: 必须包含至少一个修饰键（Ctrl、Alt、Shift、Cmd）
 
-### Supported Key Combinations
+### 支持的按键组合
 
-- **Modifier keys**: `⌃` (Ctrl), `⌥` (Alt), `⇧` (Shift), `⌘` (Cmd)
-- **Regular keys**: A-Z, 0-9
-- **Special keys**: Space, Arrow keys, F1-F12, Esc, Enter, Tab, etc.
-- **Examples**: `⌘R`, `⌃⇧A`, `⌥F1`, `⌃⌥⇧K`
+- **修饰键**: `⌃` (Ctrl), `⌥` (Alt), `⇧` (Shift), `⌘` (Cmd)
+- **常规键**: A-Z, 0-9
+- **特殊键**: 空格、方向键、F1-F12、Esc、Enter、Tab 等
+- **示例**: `⌘R`, `⌃⇧A`, `⌥F1`, `⌃⌥⇧K`
 
-## Installation
+## 安装方法
 
-### From SiYuan Marketplace
-1. Open SiYuan → Settings → Marketplace → Plugins
-2. Search for "Shortcut Color"
-3. Click Install
+### 从思源笔记集市安装
+1. 打开思源笔记 → 设置 → 集市 → 插件
+2. 搜索"快捷键变色"
+3. 点击安装
 
-### Manual Installation
-1. Download the plugin package
-2. Extract to `{workspace}/data/plugins/shortcut-color-plugin/`
-3. Restart SiYuan
-4. Enable the plugin in Settings → Marketplace → Downloaded
+### 手动安装
+1. 下载插件包
+2. 解压到 `{工作空间}/data/plugins/shortcut-color-plugin/`
+3. 重启思源笔记
+4. 在设置 → 集市 → 已下载中启用插件
 
-## Tips
+## 使用技巧
 
-- **Organize by color**: Use similar colors for related content types
-- **Consistent shortcuts**: Choose memorable key combinations
-- **Test combinations**: Make sure shortcuts don't conflict with SiYuan's built-in shortcuts
-- **Mobile friendly**: The plugin interface adapts to mobile screens
+- **按颜色分类**: 为相关内容类型使用相似颜色
+- **一致的快捷键**: 选择容易记忆的组合键
+- **测试组合**: 确保快捷键不与思源笔记的内置快捷键冲突
+- **移动端友好**: 插件界面自适应移动设备屏幕
 
-## Troubleshooting
+## 故障排除
 
-**Shortcuts not working?**
-- Check if the key combination conflicts with system shortcuts
-- Ensure the plugin is enabled
-- Try restarting SiYuan
+**快捷键不工作？**
+- 检查组合键是否与系统快捷键冲突
+- 确保插件已启用
+- 尝试重启思源笔记
 
-**Can't undo formatting?**
-- The plugin supports native undo (Cmd+Z/Ctrl+Z)
-- If issues persist, try selecting the formatted text and applying a different format
+**无法撤销格式？**
+- 插件支持原生撤销（Cmd+Z/Ctrl+Z）
+- 如果问题持续，尝试选中格式化的文本并应用其他格式
 
-**Settings not saving?**
-- Make sure to click "Save" after making changes
-- Check if SiYuan has write permissions to the plugin directory
+**设置无法保存？**
+- 确保在更改后点击"保存"
+- 检查思源笔记是否有插件目录的写入权限
 
-## License
+## 许可证
 
 MIT License
 
-## Author
+## 作者
 
 zhongjiahao
