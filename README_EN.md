@@ -9,6 +9,10 @@ Contributions and improvements from everyone are also very welcome!
 
 A powerful SiYuan plugin that allows you to quickly format text with custom colors and bold styles using keyboard shortcuts.
 
+## Screenshots
+
+![preview](preview.png)
+
 ## Features
 
 - **Custom Keyboard Shortcuts**: Create personalized shortcuts for text formatting
