@@ -1,9 +1,30 @@
 // 快捷键变色插件样式
 
 // 设置面板样式
+// 通知设置样式
+.notification-settings {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    
+    label {
+        font-weight: 500;
+        color: var(--b3-text-color);
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
 .shortcut-color-settings {
-  padding: 16px;
-  width: 100%;
+    padding: 16px;
+    width: 100%;
   
   .shortcut-color-list {
     width: 100%;
@@ -108,12 +129,21 @@
           }
         }
         
-        .shortcut-bold {
-          width: 20px;
-          height: 20px;
-          cursor: pointer;
-          align-self: center;
-        }
+                .shortcut-bold,
+                .shortcut-italic {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    align-self: center;
+                }
+                
+                // 统一的格式复选框样式
+                .format-checkbox {
+                    width: 18px;
+                    height: 18px;
+                    cursor: pointer;
+                    margin-left: 8px;
+                }
         
       }
     }

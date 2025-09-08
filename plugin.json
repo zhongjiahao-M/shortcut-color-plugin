@@ -21,8 +21,8 @@
     "desktop-window"
   ],
   "displayName": {
-    "default": "Shortcut Color",
-    "zh_CN": "快捷键变色"
+    "default": "Shortcut Font Style",
+    "zh_CN": "快捷格式化字体样式"
   },
   "description": {
     "default": "A plugin that allows customizable keyboard shortcuts for text formatting with colors",

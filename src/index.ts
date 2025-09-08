@@ -17,11 +17,18 @@ interface ColorShortcut {
     color: string;
     name: string;
     bold: boolean;
+    italic: boolean;
+}
+
+interface PluginConfig {
+    shortcuts: ColorShortcut[];
+    showNotification: boolean;
 }
 
 export default class ShortcutColorPlugin extends Plugin {
     private isMobile: boolean;
     private shortcuts: ColorShortcut[] = [];
+    private showNotification: boolean = false;
 
     onload() {
         const frontEnd = getFrontend();
@@ -56,18 +63,30 @@ export default class ShortcutColorPlugin extends Plugin {
     private initializeDefaultData() {
         // 设置默认的快捷键配置
         const defaultShortcuts: ColorShortcut[] = [
-            { id: "red", hotkey: "⌃R", color: "#ff0000", name: "红色加粗", bold: true },
-            { id: "blue", hotkey: "⌃B", color: "#0066cc", name: "蓝色加粗", bold: true },
-            { id: "orange", hotkey: "⌃O", color: "#ff9900", name: "橙色加粗", bold: true },
-            { id: "purple", hotkey: "⌃P", color: "#9966cc", name: "紫色加粗", bold: true },
-            { id: "black", hotkey: "⌃K", color: "#000000", name: "黑色文本", bold: false }
+            { id: "red", hotkey: "⌃R", color: "#ff0000", name: "红色加粗", bold: true, italic: false },
+            { id: "blue", hotkey: "⌃B", color: "#0066cc", name: "蓝色加粗", bold: true, italic: false },
+            { id: "orange", hotkey: "⌃O", color: "#ff9900", name: "橙色加粗", bold: true, italic: false },
+            { id: "purple", hotkey: "⌃P", color: "#9966cc", name: "紫色加粗", bold: true, italic: false },
+            { id: "black", hotkey: "⌃K", color: "#000000", name: "黑色文本", bold: false, italic: false }
         ];
 
         if (!this.data[STORAGE_NAME]) {
-            this.data[STORAGE_NAME] = { shortcuts: defaultShortcuts };
+            const defaultConfig: PluginConfig = { 
+                shortcuts: defaultShortcuts, 
+                showNotification: false 
+            };
+            this.data[STORAGE_NAME] = defaultConfig;
             this.shortcuts = defaultShortcuts;
+            this.showNotification = false;
         } else {
-            this.shortcuts = this.data[STORAGE_NAME].shortcuts || defaultShortcuts;
+            const config = this.data[STORAGE_NAME] as PluginConfig;
+            // 迁移旧数据，为没有 italic 字段的快捷键添加默认值
+            const shortcuts = (config.shortcuts || defaultShortcuts).map(shortcut => ({
+                ...shortcut,
+                italic: shortcut.italic !== undefined ? shortcut.italic : false
+            }));
+            this.shortcuts = shortcuts;
+            this.showNotification = config.showNotification || false;
         }
     }
 
@@ -75,9 +94,39 @@ export default class ShortcutColorPlugin extends Plugin {
         const plugin = this;
         this.setting = new Setting({
             confirmCallback: () => {
-                plugin.saveData(STORAGE_NAME, { shortcuts: plugin.shortcuts });
+                const config: PluginConfig = { 
+                    shortcuts: plugin.shortcuts, 
+                    showNotification: plugin.showNotification 
+                };
+                plugin.saveData(STORAGE_NAME, config);
                 plugin.registerShortcuts();
                 showMessage("设置已保存");
+            }
+        });
+
+        // 添加通知设置
+        this.setting.addItem({
+            title: "通知设置",
+            description: "设置是否显示格式应用成功的通知",
+            createActionElement: () => {
+                const container = document.createElement("div");
+                container.className = "notification-settings";
+                
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = "show-notification";
+                checkbox.checked = plugin.showNotification;
+                checkbox.addEventListener("change", (e) => {
+                    plugin.showNotification = (e.target as HTMLInputElement).checked;
+                });
+                
+                const label = document.createElement("label");
+                label.htmlFor = "show-notification";
+                label.textContent = "显示格式应用成功通知";
+                
+                container.appendChild(checkbox);
+                container.appendChild(label);
+                return container;
             }
         });
 
@@ -117,8 +166,14 @@ export default class ShortcutColorPlugin extends Plugin {
                                 <input type="color" class="shortcut-color" value="${shortcut.color}">
                             </div>
                             <div class="shortcut-input-group">
-                                <label>加粗:</label>
-                                <input type="checkbox" class="shortcut-bold" ${shortcut.bold ? 'checked' : ''}>
+                                <div class="fn__flex" style="margin-bottom: 8px;">
+                                    <label class="fn__flex-center" style="width: 60px;">加粗:</label>
+                                    <input type="checkbox" class="shortcut-bold format-checkbox" ${shortcut.bold ? 'checked' : ''}>
+                                </div>
+                                <div class="fn__flex">
+                                    <label class="fn__flex-center" style="width: 60px;">斜体:</label>
+                                    <input type="checkbox" class="shortcut-italic format-checkbox" ${shortcut.italic ? 'checked' : ''}>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,16 +193,17 @@ export default class ShortcutColorPlugin extends Plugin {
     private bindSettingsEvents(container: HTMLElement) {
         const plugin = this;
         
-        // 添加新快捷键
-        const addButton = container.querySelector('.add-shortcut') as HTMLButtonElement;
-        addButton?.addEventListener('click', () => {
-            const newShortcut: ColorShortcut = {
-                id: `custom_${Date.now()}`,
-                hotkey: "",
-                color: "#000000",
-                name: "新快捷键",
-                bold: true
-            };
+         // 添加新快捷键
+         const addButton = container.querySelector('.add-shortcut') as HTMLButtonElement;
+         addButton?.addEventListener('click', () => {
+             const newShortcut: ColorShortcut = {
+                 id: `custom_${Date.now()}`,
+                 hotkey: "",
+                 color: "#000000",
+                 name: "新快捷键",
+                 bold: true,
+                 italic: false
+             };
             plugin.shortcuts.push(newShortcut);
             plugin.renderShortcutSettings(container);
         });
@@ -160,12 +216,13 @@ export default class ShortcutColorPlugin extends Plugin {
             });
         });
 
-        // 更新快捷键数据
-        container.querySelectorAll('.shortcut-color-item').forEach((item, index) => {
-            const nameInput = item.querySelector('.shortcut-name') as HTMLInputElement;
-            const hotkeyInput = item.querySelector('.shortcut-hotkey') as HTMLInputElement;
-            const colorInput = item.querySelector('.shortcut-color') as HTMLInputElement;
-            const boldInput = item.querySelector('.shortcut-bold') as HTMLInputElement;
+         // 更新快捷键数据
+         container.querySelectorAll('.shortcut-color-item').forEach((item, index) => {
+             const nameInput = item.querySelector('.shortcut-name') as HTMLInputElement;
+             const hotkeyInput = item.querySelector('.shortcut-hotkey') as HTMLInputElement;
+             const colorInput = item.querySelector('.shortcut-color') as HTMLInputElement;
+             const boldInput = item.querySelector('.shortcut-bold') as HTMLInputElement;
+             const italicInput = item.querySelector('.shortcut-italic') as HTMLInputElement;
 
             // 名称更新
             nameInput?.addEventListener('input', () => {
@@ -182,10 +239,15 @@ export default class ShortcutColorPlugin extends Plugin {
                 plugin.shortcuts[index].color = colorInput.value;
             });
 
-            // 加粗选项更新
-            boldInput?.addEventListener('change', () => {
-                plugin.shortcuts[index].bold = boldInput.checked;
-            });
+             // 加粗选项更新
+             boldInput?.addEventListener('change', () => {
+                 plugin.shortcuts[index].bold = boldInput.checked;
+             });
+
+             // 斜体选项更新
+             italicInput?.addEventListener('change', () => {
+                 plugin.shortcuts[index].italic = italicInput.checked;
+             });
 
             // 快捷键捕获 - 点击输入框触发
             hotkeyInput?.addEventListener('click', () => {
@@ -264,8 +326,8 @@ export default class ShortcutColorPlugin extends Plugin {
                 keys.push(keyName);
             }
             
-            // 至少需要一个修饰键和一个主键，或者是功能键
-            if (keys.length >= 2 || (keys.length === 1 && ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Esc', '⌫', '↵', '⇥'].includes(keys[0]))) {
+             // 至少需要一个修饰键和一个主键，或者是功能键
+             if (keys.length >= 2 || (keys.length === 1 && ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Esc', '⌫', '↵', '⇥'].indexOf(keys[0]) !== -1)) {
                 const hotkey = keys.join('');
                 input.value = hotkey;
                 plugin.shortcuts[index].hotkey = hotkey;
@@ -309,19 +371,19 @@ export default class ShortcutColorPlugin extends Plugin {
         
         this.shortcuts.forEach(shortcut => {
             if (shortcut.hotkey) {
-                this.addCommand({
-                    langKey: shortcut.id,
-                    langText: shortcut.name,
-                    hotkey: shortcut.hotkey,
-                    callback: () => {
-                        plugin.applyColorFormat(shortcut.color, shortcut.bold);
-                    }
-                });
+                 this.addCommand({
+                     langKey: shortcut.id,
+                     langText: shortcut.name,
+                     hotkey: shortcut.hotkey,
+                     callback: () => {
+                         plugin.applyColorFormat(shortcut.color, shortcut.bold, shortcut.italic);
+                     }
+                 });
             }
         });
     }
 
-    private applyColorFormat(color: string, bold: boolean = true) {
+    private applyColorFormat(color: string, bold: boolean = true, italic: boolean = false) {
         const editors = getAllEditor();
         if (editors.length === 0) {
             showMessage("请先打开一个文档");
@@ -356,12 +418,18 @@ export default class ShortcutColorPlugin extends Plugin {
             return;
         }
 
-        // 使用思源笔记的格式化方式，确保可以撤销
-        try {
-            // 创建格式化的HTML
-            const formattedHTML = bold 
-                ? `<strong style="color: ${color};">${selectedText}</strong>`
-                : `<span style="color: ${color};">${selectedText}</span>`;
+         // 使用思源笔记的格式化方式，确保可以撤销
+         try {
+             // 创建格式化的HTML
+             let formattedHTML = `<span style="color: ${color};">${selectedText}</span>`;
+             
+             if (bold && italic) {
+                 formattedHTML = `<span data-type="strong em text" style="color: ${color};">${selectedText}</span>`;
+             } else if (bold) {
+                 formattedHTML = `<span data-type="strong" style="color: ${color};">${selectedText}</span>`;
+             } else if (italic) {
+                 formattedHTML = `<span data-type="em" style="color: ${color};">${selectedText}</span>`;
+             }
             
             // 获取当前焦点的块元素
             const focusElement = range.startContainer.nodeType === Node.TEXT_NODE 
@@ -385,10 +453,17 @@ export default class ShortcutColorPlugin extends Plugin {
             const updateEvent = new CustomEvent('input', { bubbles: true });
             blockElement.dispatchEvent(updateEvent);
             
-            // 清除选择
-            selection.removeAllRanges();
-            
-            showMessage(`已应用${bold ? '加粗' : ''}颜色格式: ${color}`);
+             // 清除选择
+             selection.removeAllRanges();
+             
+             // 根据设置决定是否显示通知
+             if (this.showNotification) {
+                 const formatText = [];
+                 if (bold) formatText.push('加粗');
+                 if (italic) formatText.push('斜体');
+                 const formatStr = formatText.length > 0 ? formatText.join('+') : '颜色';
+                 showMessage(`已应用${formatStr}格式: ${color}`);
+             }
             
         } catch (error) {
             console.error('应用格式时出错:', error);
@@ -489,13 +564,13 @@ export default class ShortcutColorPlugin extends Plugin {
     private bindDockEvents(element: HTMLElement) {
         const plugin = this;
         
-        // 绑定快捷键按钮点击事件
-        element.querySelectorAll('.shortcut-apply-btn').forEach((button, index) => {
-            button.addEventListener('click', () => {
-                const shortcut = plugin.shortcuts[index];
-                plugin.applyColorFormat(shortcut.color, shortcut.bold);
-            });
-        });
+         // 绑定快捷键按钮点击事件
+         element.querySelectorAll('.shortcut-apply-btn').forEach((button, index) => {
+             button.addEventListener('click', () => {
+                 const shortcut = plugin.shortcuts[index];
+                 plugin.applyColorFormat(shortcut.color, shortcut.bold, shortcut.italic);
+             });
+         });
 
         // 绑定添加新快捷键按钮
         const addButton = element.querySelector('.add-new-shortcut');
@@ -524,6 +599,16 @@ export default class ShortcutColorPlugin extends Plugin {
                             <label class="fn__flex-center" style="width: 80px;">颜色:</label>
                             <input type="color" class="fn__flex-1" id="shortcut-color" value="#000000" style="height: 32px;">
                         </div>
+                        <div class="shortcut-input-group" style="margin-bottom: 12px;">
+                            <div class="fn__flex" style="margin-bottom: 8px;">
+                                <label class="fn__flex-center" style="width: 80px;">加粗:</label>
+                                <input type="checkbox" id="shortcut-bold" checked class="format-checkbox">
+                            </div>
+                            <div class="fn__flex">
+                                <label class="fn__flex-center" style="width: 80px;">斜体:</label>
+                                <input type="checkbox" id="shortcut-italic" class="format-checkbox">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="b3-dialog__action">
@@ -535,10 +620,12 @@ export default class ShortcutColorPlugin extends Plugin {
             width: this.isMobile ? "92vw" : "420px",
         });
 
-        const nameInput = dialog.element.querySelector("#shortcut-name") as HTMLInputElement;
-        const hotkeyInput = dialog.element.querySelector("#shortcut-hotkey") as HTMLInputElement;
-        const colorInput = dialog.element.querySelector("#shortcut-color") as HTMLInputElement;
-        const buttons = dialog.element.querySelectorAll(".b3-button");
+         const nameInput = dialog.element.querySelector("#shortcut-name") as HTMLInputElement;
+         const hotkeyInput = dialog.element.querySelector("#shortcut-hotkey") as HTMLInputElement;
+         const colorInput = dialog.element.querySelector("#shortcut-color") as HTMLInputElement;
+         const boldInput = dialog.element.querySelector("#shortcut-bold") as HTMLInputElement;
+         const italicInput = dialog.element.querySelector("#shortcut-italic") as HTMLInputElement;
+         const buttons = dialog.element.querySelectorAll(".b3-button");
 
         nameInput.focus();
 
@@ -559,16 +646,21 @@ export default class ShortcutColorPlugin extends Plugin {
                 return;
             }
 
-            const newShortcut: ColorShortcut = {
-                id: `custom_${Date.now()}`,
-                name: nameInput.value.trim(),
-                hotkey: hotkeyInput.value.trim(),
-                color: colorInput.value,
-                bold: true
-            };
+             const newShortcut: ColorShortcut = {
+                 id: `custom_${Date.now()}`,
+                 name: nameInput.value.trim(),
+                 hotkey: hotkeyInput.value.trim(),
+                 color: colorInput.value,
+                 bold: boldInput.checked,
+                 italic: italicInput.checked
+             };
 
             plugin.shortcuts.push(newShortcut);
-            plugin.saveData(STORAGE_NAME, { shortcuts: plugin.shortcuts });
+            const config: PluginConfig = { 
+                shortcuts: plugin.shortcuts, 
+                showNotification: plugin.showNotification 
+            };
+            plugin.saveData(STORAGE_NAME, config);
             plugin.registerShortcuts();
 
             showMessage("快捷键已添加");
