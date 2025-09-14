@@ -1,517 +1,466 @@
-// 快捷键变色插件样式
-
-// 设置面板样式
-// 通知设置样式
+.b3-label.config__item.sc-compact-row {
+  flex: 0 0 auto !important;
+  align-self: flex-start !important;
+  height: auto !important;
+  min-height: auto !important;
+  align-items: flex-start !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.b3-label.config__item.sc-no-flex {
+  display: block !important;
+}
+.b3-label.config__item.sc-no-flex .b3-label__text {
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+.b3-label.config__item.sc-no-flex .b3-label__content {
+  display: block;
+  width: 100%;
+}
+.b3-label.config__item.sc-compact-row .b3-label__text {
+  margin-top: 4px;
+}
+.b3-label.config__item.sc-compact-row .b3-label__content {
+  width: 100%;
+}
 .notification-settings {
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    
-    input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-    }
-    
-    label {
-        font-weight: 500;
-        color: var(--b3-text-color);
-        cursor: pointer;
-        user-select: none;
-    }
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-
+.notification-settings input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+.notification-settings label {
+  font-weight: 500;
+  color: var(--b3-text-color);
+  cursor: pointer;
+  user-select: none;
+}
+.convert-settings {
+  padding: 8px 0;
+  width: 100%;
+}
+.convert-settings .shortcut-color-list {
+  display: block;
+  margin: 0;
+}
+.convert-settings .convert-function-item {
+  background: var(--b3-card-background);
+  border: 1px solid var(--b3-border-color);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0;
+}
+.convert-settings .convert-function-item .function-badge {
+  background: var(--b3-theme-primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+.convert-settings .convert-function-item .convert-content {
+  margin-top: 8px;
+}
+.convert-settings .convert-function-item .convert-content .convert-description {
+  background: var(--b3-list-hover);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--b3-theme-primary);
+}
+.convert-settings .convert-function-item .convert-content .convert-description p {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+.convert-settings .convert-function-item .convert-content .convert-description p:first-child {
+  margin-top: 0;
+}
+.convert-settings .convert-function-item .convert-content .convert-description p:last-child {
+  margin-bottom: 0;
+}
+.convert-settings .convert-function-item .convert-content .convert-description code {
+  background: var(--b3-theme-surface);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--b3-font-family-code);
+  font-size: 12px;
+  color: var(--b3-theme-on-surface);
+  border: 1px solid var(--b3-border-color);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.convert-settings .convert-function-item .convert-content .convert-description strong {
+  color: var(--b3-theme-primary);
+  font-weight: 600;
+}
+.convert-settings .convert-function-item .convert-content .shortcut-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.convert-settings .convert-function-item .convert-content .shortcut-input-group label {
+  font-weight: 500;
+  color: var(--b3-text-color);
+  font-size: 14px;
+}
+.convert-settings .convert-function-item .convert-content .shortcut-input-group .convert-hotkey {
+  width: 200px;
+}
+.convert-settings .convert-function-item .convert-content .shortcut-input-group .convert-hotkey.capturing {
+  border-color: var(--b3-theme-primary);
+  box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), .2);
+  animation: pulse 1s infinite;
+}
+.convert-settings .convert-function-item .convert-content .shortcut-input-group .convert-hotkey[readonly] {
+  background: var(--b3-list-hover);
+  cursor: pointer;
+}
+.convert-settings .convert-function-item .convert-content .shortcut-input-group .convert-hotkey[readonly]:hover {
+  background: var(--b3-theme-primary-lighter);
+}
 .shortcut-color-settings {
-    padding: 16px;
-    width: 100%;
-  
-  .shortcut-color-list {
-    width: 100%;
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  
-  .shortcut-color-item {
-    background: var(--b3-card-background);
-    border: 1px solid var(--b3-border-color);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease;
-    
-    &:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-color: var(--b3-theme-primary);
-    }
-    
-    .shortcut-item-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      
-      .shortcut-item-title {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--b3-text-color);
-      }
-      
-      .remove-shortcut {
-        width: 24px;
-        height: 24px;
-        padding: 0;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        line-height: 1;
-        background: var(--b3-button-background);
-        
-        &:hover {
-          background: var(--b3-button-cancel-background);
-          color: var(--b3-button-cancel-color);
-        }
-      }
-    }
-    
-    .shortcut-item-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      
-      .shortcut-input-group {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        
-        label {
-          font-weight: 500;
-          color: var(--b3-text-color);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-        
-        .b3-text-field {
-          width: 100%;
-          
-          &.capturing {
-            border-color: var(--b3-theme-primary);
-            box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), 0.2);
-            animation: pulse 1s infinite;
-          }
-          
-          &[readonly] {
-            background: var(--b3-list-hover);
-            cursor: pointer;
-            
-            &:hover {
-              background: var(--b3-theme-primary-lighter);
-            }
-          }
-        }
-        
-        .shortcut-color {
-          width: 100%;
-          height: 36px;
-          border: 2px solid var(--b3-border-color);
-          border-radius: 6px;
-          cursor: pointer;
-          
-          &:hover {
-            border-color: var(--b3-theme-primary);
-          }
-        }
-        
-                .shortcut-bold,
-                .shortcut-italic {
-                    width: 20px;
-                    height: 20px;
-                    cursor: pointer;
-                    align-self: center;
-                }
-                
-                // 统一的格式复选框样式
-                .format-checkbox {
-                    width: 18px;
-                    height: 18px;
-                    cursor: pointer;
-                    margin-left: 8px;
-                }
-        
-      }
-    }
-  }
-  
-  .add-shortcut-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--b3-list-hover);
-    border: 2px dashed var(--b3-border-color);
-    border-radius: 8px;
-    padding: 0;
-    transition: all 0.2s ease;
-    
-    &:hover {
-      border-color: var(--b3-theme-primary);
-      background: var(--b3-theme-primary-lightest);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .add-shortcut {
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 24px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      
-      .add-icon {
-        font-size: 42px;
-        font-weight: 200;
-        color: var(--b3-text-color);
-        line-height: 1;
-        opacity: 0.8;
-      }
-      
-      .add-text {
-        font-size: 16px;
-        color: var(--b3-text-color);
-        font-weight: 500;
-        opacity: 0.8;
-        text-align: center;
-      }
-      
-      &:hover {
-        background: transparent;
-        
-        .add-icon {
-          color: var(--b3-theme-primary);
-          transform: scale(1.15);
-          opacity: 1;
-        }
-        
-        .add-text {
-          color: var(--b3-theme-primary);
-          opacity: 1;
-        }
-      }
-    }
-  }
-  
-  // 动画效果
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), 0.2); }
-    50% { box-shadow: 0 0 0 4px rgba(var(--b3-theme-primary-rgb), 0.4); }
-    100% { box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), 0.2); }
-  }
-  
-  // 平板响应式
-  @media (max-width: 1024px) {
-    .shortcut-color-list {
-      gap: 12px;
-    }
-  }
-  
-  // 移动端响应式
-  @media (max-width: 768px) {
-    padding: 12px;
-    
-    .shortcut-color-list {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    
-    .add-shortcut-item {
-      .add-shortcut {
-        padding: 20px;
-        gap: 10px;
-        
-        .add-icon {
-          font-size: 36px;
-        }
-        
-        .add-text {
-          font-size: 14px;
-        }
-      }
-    }
-    
-    .shortcut-color-item {
-      padding: 12px;
-      
-      .shortcut-item-header {
-        margin-bottom: 12px;
-        
-        .shortcut-item-title {
-          font-size: 14px;
-        }
-      }
-      
-      .shortcut-item-content {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        
-        .shortcut-input-group {
-          width: 100%;
-          
-          label {
-            font-size: 11px;
-          }
-          
-          .shortcut-color {
-            height: 32px;
-          }
-        }
-      }
-    }
-  }
-  
-  // 小屏幕移动设备
-  @media (max-width: 480px) {
-    padding: 8px;
-    
-    .add-shortcut-item {
-      .add-shortcut {
-        padding: 16px;
-        gap: 8px;
-        
-        .add-icon {
-          font-size: 32px;
-        }
-        
-        .add-text {
-          font-size: 12px;
-        }
-      }
-    }
-    
-    .shortcut-color-item {
-      padding: 8px;
-      
-      .shortcut-item-content {
-        gap: 8px;
-        
-        .shortcut-input-group {
-          .shortcut-color {
-            height: 28px;
-          }
-        }
-      }
-    }
-  }
+  padding: 16px;
+  width: 100%;
 }
-
-// Dock面板样式
+.shortcut-color-settings .shortcut-color-list {
+  width: 100%;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.shortcut-color-settings .shortcut-color-item {
+  background: var(--b3-card-background);
+  border: 1px solid var(--b3-border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
+  transition: all .2s ease;
+}
+.shortcut-color-settings .shortcut-color-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+  border-color: var(--b3-theme-primary);
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-header .shortcut-item-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--b3-text-color);
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-header .remove-shortcut {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  background: var(--b3-button-background);
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-header .remove-shortcut:hover {
+  background: var(--b3-button-cancel-background);
+  color: var(--b3-button-cancel-color);
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group label {
+  font-weight: 500;
+  color: var(--b3-text-color);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .b3-text-field {
+  width: 100%;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .b3-text-field.capturing {
+  border-color: var(--b3-theme-primary);
+  box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), .2);
+  animation: pulse 1s infinite;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .b3-text-field[readonly] {
+  background: var(--b3-list-hover);
+  cursor: pointer;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .b3-text-field[readonly]:hover {
+  background: var(--b3-theme-primary-lighter);
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .shortcut-color {
+  width: 100%;
+  height: 36px;
+  border: 2px solid var(--b3-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .shortcut-color:hover {
+  border-color: var(--b3-theme-primary);
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .shortcut-bold,
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-italic {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  align-self: center;
+}
+.shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .format-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.shortcut-color-settings .add-shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--b3-list-hover);
+  border: 2px dashed var(--b3-border-color);
+  border-radius: 8px;
+  padding: 0;
+  transition: all .2s ease;
+}
+.shortcut-color-settings .add-shortcut-item:hover {
+  border-color: var(--b3-theme-primary);
+  background: var(--b3-theme-primary-lightest);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+.shortcut-color-settings .add-shortcut-item .add-shortcut {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.shortcut-color-settings .add-shortcut-item .add-shortcut .add-icon {
+  font-size: 42px;
+  font-weight: 200;
+  color: var(--b3-text-color);
+  line-height: 1;
+  opacity: .8;
+}
+.shortcut-color-settings .add-shortcut-item .add-shortcut .add-text {
+  font-size: 16px;
+  color: var(--b3-text-color);
+  font-weight: 500;
+  opacity: .8;
+  text-align: center;
+}
+.shortcut-color-settings .add-shortcut-item .add-shortcut:hover {
+  background: transparent;
+}
+.shortcut-color-settings .add-shortcut-item .add-shortcut:hover .add-icon {
+  color: var(--b3-theme-primary);
+  transform: scale(1.15);
+  opacity: 1;
+}
+.shortcut-color-settings .add-shortcut-item .add-shortcut:hover .add-text {
+  color: var(--b3-theme-primary);
+  opacity: 1;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), .2); }
+  50% { box-shadow: 0 0 0 4px rgba(var(--b3-theme-primary-rgb), .4); }
+  100% { box-shadow: 0 0 0 2px rgba(var(--b3-theme-primary-rgb), .2); }
+}
+@media (max-width: 1024px) {
+  .shortcut-color-settings .shortcut-color-list { gap: 12px; }
+}
+@media (max-width: 768px) {
+  .shortcut-color-settings { padding: 12px; }
+  .shortcut-color-settings .shortcut-color-list { grid-template-columns: 1fr; gap: 12px; }
+  .add-shortcut-item .add-shortcut { padding: 20px; gap: 10px; }
+  .add-shortcut-item .add-shortcut .add-icon { font-size: 36px; }
+  .add-shortcut-item .add-shortcut .add-text { font-size: 14px; }
+  .shortcut-color-settings .shortcut-color-item { padding: 12px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-header { margin-bottom: 12px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-header .shortcut-item-title { font-size: 14px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content { display: flex; flex-direction: column; gap: 12px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group { width: 100%; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group label { width: auto; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .shortcut-color { height: 32px; }
+}
+@media (max-width: 480px) {
+  .shortcut-color-settings { padding: 8px; }
+  .add-shortcut-item .add-shortcut { padding: 16px; gap: 8px; }
+  .add-shortcut-item .add-shortcut .add-icon { font-size: 32px; }
+  .add-shortcut-item .add-shortcut .add-text { font-size: 12px; }
+  .shortcut-color-settings .shortcut-color-item { padding: 8px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content { gap: 8px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .shortcut-color { height: 28px; }
+}
 .shortcut-color-dock,
 .shortcut-color-dock-mobile {
   padding: 16px;
   background: var(--b3-theme-background);
   height: 100%;
   overflow-y: auto;
-  
-  .shortcut-buttons-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .shortcut-buttons-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--b3-border-color);
-    
-    h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--b3-text-color);
-    }
-    
-    .add-new-shortcut {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      padding: 6px 12px;
-      
-      svg {
-        width: 14px;
-        height: 14px;
-      }
-    }
-  }
-  
-  .shortcut-buttons-list {
-    flex: 1;
-    overflow-y: auto;
-  }
-  
-  .shortcut-button-item {
-    margin-bottom: 8px;
-    
-    .shortcut-apply-btn {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      text-align: left;
-      background: var(--b3-card-background);
-      border: 1px solid var(--b3-border-color);
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      
-      &:hover {
-        background: var(--b3-card-hover-background);
-        border-color: var(--b3-border-hover-color);
-        transform: translateY(-1px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-      
-      &:active {
-        transform: translateY(0);
-      }
-      
-      .shortcut-name {
-        font-weight: 500;
-        color: var(--b3-text-color);
-        font-size: 14px;
-      }
-      
-      .shortcut-hotkey {
-        background: var(--b3-theme-on-background);
-        color: var(--b3-theme-background);
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-family: var(--b3-font-family-code);
-        font-weight: 500;
-      }
-    }
-  }
 }
-
-// 移动端特定样式
-.shortcut-color-dock-mobile {
-  .shortcut-buttons-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    
-    .add-new-shortcut {
-      justify-content: center;
-    }
-  }
-  
-  .shortcut-button-item {
-    .shortcut-apply-btn {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
-      
-      .shortcut-name {
-        text-align: center;
-      }
-      
-      .shortcut-hotkey {
-        text-align: center;
-        align-self: center;
-      }
-    }
-  }
+.shortcut-color-dock .shortcut-buttons-container,
+.shortcut-color-dock-mobile .shortcut-buttons-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-
-// 对话框样式增强
-.b3-dialog {
-  .shortcut-color-dialog-content {
-    .fn__flex-column {
-      gap: 12px;
-    }
-    
-    .fn__flex {
-      align-items: center;
-      gap: 12px;
-      
-      label {
-        min-width: 80px;
-        font-weight: 500;
-        color: var(--b3-text-color);
-      }
-      
-      input[type="color"] {
-        border: 1px solid var(--b3-border-color);
-        border-radius: 4px;
-        cursor: pointer;
-        
-        &:hover {
-          border-color: var(--b3-border-hover-color);
-        }
-      }
-    }
-  }
+.shortcut-color-dock .shortcut-buttons-header,
+.shortcut-color-dock-mobile .shortcut-buttons-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--b3-border-color);
 }
-
-// 响应式设计
+.shortcut-color-dock .shortcut-buttons-header h3,
+.shortcut-color-dock-mobile .shortcut-buttons-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--b3-text-color);
+}
+.shortcut-color-dock .shortcut-buttons-header .add-new-shortcut,
+.shortcut-color-dock-mobile .shortcut-buttons-header .add-new-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 6px 12px;
+}
+.shortcut-color-dock .shortcut-buttons-header .add-new-shortcut svg,
+.shortcut-color-dock-mobile .shortcut-buttons-header .add-new-shortcut svg {
+  width: 14px;
+  height: 14px;
+}
+.shortcut-color-dock .shortcut-buttons-list,
+.shortcut-color-dock-mobile .shortcut-buttons-list {
+  flex: 1;
+  overflow-y: auto;
+}
+.shortcut-color-dock .shortcut-button-item,
+.shortcut-color-dock-mobile .shortcut-button-item {
+  margin-bottom: 8px;
+}
+.shortcut-color-dock .shortcut-apply-btn,
+.shortcut-color-dock-mobile .shortcut-apply-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  text-align: left;
+  background: var(--b3-card-background);
+  border: 1px solid var(--b3-border-color);
+  border-radius: 6px;
+  transition: all .2s ease;
+}
+.shortcut-color-dock .shortcut-apply-btn:hover,
+.shortcut-color-dock-mobile .shortcut-apply-btn:hover {
+  background: var(--b3-card-hover-background);
+  border-color: var(--b3-border-hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+.shortcut-color-dock .shortcut-apply-btn:active,
+.shortcut-color-dock-mobile .shortcut-apply-btn:active {
+  transform: translateY(0);
+}
+.shortcut-color-dock .shortcut-name,
+.shortcut-color-dock-mobile .shortcut-name {
+  font-weight: 500;
+  color: var(--b3-text-color);
+  font-size: 14px;
+}
+.shortcut-color-dock .shortcut-hotkey,
+.shortcut-color-dock-mobile .shortcut-hotkey {
+  background: var(--b3-theme-on-background);
+  color: var(--b3-theme-background);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: var(--b3-font-family-code);
+  font-weight: 500;
+}
+.shortcut-color-dock-mobile .shortcut-buttons-header {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+.shortcut-color-dock-mobile .shortcut-apply-btn {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.shortcut-color-dock-mobile .shortcut-name {
+  text-align: center;
+}
+.shortcut-color-dock-mobile .shortcut-hotkey {
+  text-align: center;
+  align-self: center;
+}
+.b3-dialog .shortcut-color-dialog-content .fn__flex-column {
+  gap: 12px;
+}
+.b3-dialog .shortcut-color-dialog-content .fn__flex {
+  align-items: center;
+  gap: 12px;
+}
+.b3-dialog .shortcut-color-dialog-content .fn__flex label {
+  min-width: 80px;
+  font-weight: 500;
+  color: var(--b3-text-color);
+}
+.b3-dialog .shortcut-color-dialog-content .fn__flex input[type="color"] {
+  border: 1px solid var(--b3-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.b3-dialog .shortcut-color-dialog-content .fn__flex input[type="color"]:hover {
+  border-color: var(--b3-border-hover-color);
+}
 @media (max-width: 768px) {
-  .shortcut-color-settings {
-    padding: 12px;
-    
-    .shortcut-color-item {
-      padding: 12px;
-      
-      .shortcut-input-group {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-        
-        label {
-          width: auto;
-        }
-        
-        .b3-text-field,
-        .shortcut-color {
-          margin-left: 0;
-        }
-      }
-    }
-  }
+  .shortcut-color-settings { padding: 12px; }
+  .shortcut-color-settings .shortcut-color-item { padding: 12px; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group label { width: auto; }
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .b3-text-field,
+  .shortcut-color-settings .shortcut-color-item .shortcut-item-content .shortcut-input-group .shortcut-color { margin-left: 0; }
 }
-
-// 动画效果
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 .shortcut-color-item {
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn .3s ease;
 }
-
-// 颜色指示器
 .color-indicator {
   width: 20px;
   height: 20px;
@@ -520,8 +469,6 @@
   display: inline-block;
   margin-right: 8px;
 }
-
-// 工具提示样式
 .shortcut-tooltip {
   background: var(--b3-theme-on-background);
   color: var(--b3-theme-background);
