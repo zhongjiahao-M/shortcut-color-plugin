@@ -522,6 +522,19 @@ export default class ShortcutColorPlugin extends Plugin {
     }
   }
 
+  private triggerEditorInput(blockElement: HTMLElement) {
+    const editable = blockElement.querySelector('[contenteditable="true"]') as HTMLElement | null;
+    if (!editable) return;
+    try {
+      const evt = new (window as any).InputEvent("input", { bubbles: true, cancelable: true, inputType: "insertText", data: "" });
+      editable.dispatchEvent(evt);
+    } catch {
+      const evt = document.createEvent("Event");
+      evt.initEvent("input", true, true);
+      editable.dispatchEvent(evt);
+    }
+  }
+
   private async applyColorFormat(color: string, bold = true, italic = false) {
     const editors = getAllEditor();
     if (editors.length === 0) return showMessage("请先打开一个文档");
@@ -546,7 +559,7 @@ export default class ShortcutColorPlugin extends Plugin {
     this.hoistFromStyledParent(wrap);
     this.mergeAdjacent(wrap);
     this.placeCaretAfter(wrap);
-    await this.persistBlockByElement(blockElement);
+    this.triggerEditorInput(blockElement);
     if (this.showNotification) {
       const parts: string[] = [];
       if (bold) parts.push("加粗");
