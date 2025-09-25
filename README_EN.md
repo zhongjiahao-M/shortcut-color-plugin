@@ -7,7 +7,7 @@ Contributions and improvements from everyone are also very welcome!
 # ⭐GitHub Repository: https://github.com/zhongjiahao-M/shortcut-color-plugin.git
 # Shortcut Color Plugin
 
-A powerful SiYuan plugin that allows you to quickly format text with custom colors and bold styles using keyboard shortcuts.
+A powerful SiYuan plugin that allows you to quickly format text with custom colors, background colors and styles using keyboard shortcuts.
 
 ## Screenshots
 
@@ -17,14 +17,15 @@ A powerful SiYuan plugin that allows you to quickly format text with custom colo
 
 - **Cross-Platform Compatibility**: Perfect support for Windows and macOS systems with automatic platform-specific shortcuts
 - **Custom Keyboard Shortcuts**: Create personalized shortcuts for text formatting
-- **Color Customization**: Choose any color for your text formatting
-- **Style Combinations**: Support for bold, italic, and color in any combination
+- **Color Customization**: Choose any color for text and background
+- **Style Combinations**: Support for bold, italic, text color, and background color in any combination
 - **Smart Hotkey Capture**: Click input field and press key combinations to set shortcuts
 - **Dock Panel**: Convenient dock panel for quick access to all shortcuts
 - **Format Conversion**: One-click conversion from old formats to SiYuan standard format
 - **Notification Settings**: Customizable notifications for successful formatting
 - **Responsive Design**: Works perfectly on desktop and mobile devices
 - **Undo Support**: All formatting can be undone with Cmd+Z (Ctrl+Z)
+- **Optimized Interface**: Wider color pickers for better usability
 
 ## Default Shortcuts
 
@@ -66,14 +67,14 @@ The plugin automatically configures different shortcuts based on your operating 
 ### Customizing Shortcuts
 
 1. Open **Settings** → **Plugin Settings** → **Shortcut Color**
-2. Each shortcut item shows in a row with:
-   - **Name**: Description of the shortcut
-   - **Hotkey**: Click to go to SiYuan settings to modify shortcuts
-   - **Color**: Click to choose a color
-   - **Bold**: Check/uncheck for bold formatting
-   - **Italic**: Check/uncheck for italic formatting
+2. Each shortcut item displays as a card with:
+   - **Title Bar**: Click directly to edit the shortcut name (editable input field)
+   - **Hotkey**: Shows current hotkey, click to go to SiYuan settings to modify
+   - **Text Color**: Use color input and wider color picker to set text color
+   - **Background Color**: Use color input and wider color picker to set background color (leave empty for none)
+   - **Style Options**: Check/uncheck for bold or italic (horizontally arranged)
 3. **Adding shortcuts**: Click "Add Shortcut" button
-4. **Removing shortcuts**: Click the "×" button on any item
+4. **Removing shortcuts**: Click the "×" button in the top-right corner of the card
 5. **Save settings**: Click "Save" to apply changes
 
 ### Format Conversion
@@ -86,7 +87,7 @@ The plugin automatically configures different shortcuts based on your operating 
 ### Setting Hotkeys
 
 1. **Go to SiYuan Settings** → **Hotkeys** → **Plugins** → **Shortcut Font Style**
-2. **Find the corresponding command** and set the hotkey
+2. **Find the corresponding command** (using the name you set) and set the hotkey
 3. **Cross-platform support**: Windows and macOS use different modifier keys
 4. **Requirements**: Must include at least one modifier key (Ctrl, Alt, Shift, Cmd)
 
@@ -110,15 +111,24 @@ The plugin automatically configures different shortcuts based on your operating 
 3. Restart SiYuan
 4. Enable the plugin in Settings → Marketplace → Downloaded
 
+## Interface Improvements
+
+The latest version includes important interface optimizations:
+- **Simplified Name Editing**: Shortcut names are now edited directly in the card header, no separate input field needed
+- **Larger Color Pickers**: Color picker width increased to 2.5x for easier color selection
+- **Optimized Layout**: All labels and inputs use horizontal layout for a more compact and beautiful design
+- **Uniform Alignment**: All input elements maintain consistent alignment for improved visual experience
+
 ## Tips
 
 - **Organize by color**: Use similar colors for related content types
 - **Consistent shortcuts**: Choose memorable key combinations
 - **Test combinations**: Make sure shortcuts don't conflict with SiYuan's built-in shortcuts
 - **Mobile friendly**: The plugin interface adapts to mobile screens
-- **Style combinations**: Make full use of bold, italic, and color combinations
+- **Style combinations**: Make full use of bold, italic, text color, and background color combinations
 - **Format conversion**: Regularly use format conversion to maintain document format consistency
 - **Dock panel**: Use the dock panel for quick access to frequently used formats
+- **Intuitive naming**: Give shortcuts easy-to-understand names for better management
 
 ## Troubleshooting
 
