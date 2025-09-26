@@ -1,6 +1,6 @@
 {
   "name": "shortcut-color-plugin",
-  "version": "0.4.3",
+  "version": "0.4.6",
   "description": "A plugin that allows customizable keyboard shortcuts for text formatting with colors",
   "main": "index.js",
   "scripts": {
