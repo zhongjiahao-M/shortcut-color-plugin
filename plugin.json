@@ -1,7 +1,7 @@
 {
   "name": "shortcut-color-plugin",
   "author": "zhongjiahao",
-  "url": "https://github.com/zhongjiahao-M/shortcut-color-plugin.git",
+  "url": "https://github.com/zhongjiahao-M/shortcut-color-plugin",
   "version": "0.4.6",
   "minAppVersion": "0.1.0",
   "backends": [
